@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WalmartShopper</string>
+    <string name="no_data_available">No data was found</string>
+    <string name="title_activity_product_detail">ProductDetail</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

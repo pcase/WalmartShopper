@@ -1,0 +1,155 @@
+package com.azurehorsecreations.walmartshopper;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
+
+public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Product>> {
+
+    private static final String API_KEY = "e0a4274f-45b6-405b-839e-1096222be4fc";
+    private static final String BASE_URL = "https://walmartlabs-test.appspot.com/_ah/api/walmart/v1";
+    private static final String WALMART_PRODUCTS = "walmartproducts";
+    private static final String PAGE_NUMBER = "1";
+    private static final String PAGE_SIZE = "100";
+    private Context mContext;
+    private ProgressBar progressBar;
+    private boolean mShowProgressBar;
+
+    public ProductInformationFetcher(Context context) {
+        mContext = context;
+    }
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressBar = (ProgressBar) ((Activity) mContext).findViewById(R.id.progressbar);
+        if (mShowProgressBar) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected List<Product> doInBackground(Void... params) {
+        HttpsURLConnection urlConnection = null;
+        BufferedReader reader = null;
+        String productJsonStr = null;
+
+        try {
+            URL url = new URL(BASE_URL + "/" + WALMART_PRODUCTS + "/" + API_KEY + "/" + PAGE_NUMBER + "/" + PAGE_SIZE);
+            urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+            int responseCode = urlConnection.getResponseCode();
+
+            if (responseCode != HttpsURLConnection.HTTP_OK) {
+                throw new IOException("HTTP error code: " + responseCode);
+            }
+
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
+            if (inputStream == null) {
+                return null;
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
+            }
+
+            if (buffer.length() == 0) {
+                return null;
+            }
+            productJsonStr = buffer.toString();
+            List<Product> productList = parseResultData(productJsonStr);
+            inputStream.close();
+
+            for (Product product : productList) {
+                try {
+                    InputStream in = new java.net.URL(product.getProductImage()).openStream();
+                    Bitmap bitmap = BitmapFactory.decodeStream(in);
+                    product.setProductImageBitmap(bitmap);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+
+            return productList;
+        } catch (IOException e) {
+            Log.e("PlaceholderFragment", "Error ", e);
+            return null;
+        } finally{
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (final IOException e) {
+                    Log.e("PlaceholderFragment", "Error closing stream", e);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onPostExecute(List<Product> result) {
+        super.onPostExecute(result);
+        progressBar.setVisibility(View.GONE);
+        ((CallbackReceiver)mContext).handleResultData(result);
+    }
+
+    private List<Product> parseResultData(String result) {
+        List<Product> productList = new ArrayList<>();
+        try {
+            JSONObject jObject = new JSONObject(result);
+            JSONArray jArray = jObject.getJSONArray("products");
+            for (int i=0; i < jArray.length(); i++)
+            {
+                try {
+                    Product product = new Product();
+                    JSONObject item = jArray.getJSONObject(i);
+                    product.setProductId(item.getString("productId"));
+                    product.setProductName(item.getString("productName"));
+                    product.setShortDescription(item.getString("shortDescription"));
+                    product.setLongDescription(item.getString("longDescription"));
+                    product.setPrice(item.getString("price"));
+                    product.setProductImage(item.getString("productImage"));
+                    product.setReviewRating(item.getDouble("reviewRating"));
+                    product.setReviewCount(item.getInt("reviewCount"));
+                    product.setInStock(item.getBoolean("inStock"));
+                    productList.add(product);
+                } catch (JSONException e) {
+
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return productList;
+    }
+}
+
+

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="60dp"/>
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/product_id_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Id:"/>
+
+    <TextView
+        android:id="@+id/product_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_id_textView"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Name:"/>
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Short description:"/>
+    <TextView
+        android:id="@+id/short_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long description:"/>
+    <TextView
+        android:id="@+id/long_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price:"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review rating:"/>
+    <TextView
+        android:id="@+id/review_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review count:"/>
+    <TextView
+        android:id="@+id/review_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In stock:"/>
+    <TextView
+        android:id="@+id/in_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+    </TableRow>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone">
+    </ProgressBar>
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>
