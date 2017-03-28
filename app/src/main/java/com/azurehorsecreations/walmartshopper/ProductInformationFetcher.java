@@ -14,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,14 +29,22 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
     private static final String BASE_URL = "https://walmartlabs-test.appspot.com/_ah/api/walmart/v1";
     private static final String WALMART_PRODUCTS = "walmartproducts";
     private static final String PAGE_NUMBER = "1";
-    private static final String PAGE_SIZE = "100";
+    private static final String PAGE_SIZE = "50";
     private Context mContext;
     private ProgressBar progressBar;
     private boolean mShowProgressBar;
+    private int mPageNumber;
 
     public ProductInformationFetcher(Context context) {
         mContext = context;
+        mPageNumber = 1;
     }
+
+    public ProductInformationFetcher(Context context, int pageNumber) {
+        mContext = context;
+        mPageNumber = pageNumber;
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -56,7 +63,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
         String productJsonStr = null;
 
         try {
-            URL url = new URL(BASE_URL + "/" + WALMART_PRODUCTS + "/" + API_KEY + "/" + PAGE_NUMBER + "/" + PAGE_SIZE);
+            URL url = new URL(BASE_URL + "/" + WALMART_PRODUCTS + "/" + API_KEY + "/" + mPageNumber + "/" + PAGE_SIZE);
             urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();

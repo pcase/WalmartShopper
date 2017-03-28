@@ -1,6 +1,7 @@
 package com.azurehorsecreations.walmartshopper;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,27 +14,30 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.InputStream;
 
 public class ProductDetailActivity extends AppCompatActivity {
     private static final String PRODUCT = "PRODUCT";
-    Product product;
-    TextView productId;
-    TextView productName;
-    TextView shortDescription;
-    TextView longDescription;
-    TextView price;
-    TextView reviewRating;
-    TextView reviewCount;
-    TextView inStock;
-    ImageView productImage;
+    private Product product;
+    private TextView productId;
+    private TextView productName;
+    private TextView shortDescription;
+    private TextView longDescription;
+    private TextView price;
+    private TextView reviewRating;
+    private TextView reviewCount;
+    private TextView inStock;
+    private ImageView productImage;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.walmart_product_detail);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
         product = getIntent().getParcelableExtra(PRODUCT);
         productId = (TextView) findViewById(R.id.product_Id);
         productName = (TextView) findViewById(R.id.product_name);
@@ -85,6 +89,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             this.bmImage = bmImage;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
             Bitmap bitmap = null;
@@ -100,6 +110,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Bitmap result) {
+            progressBar.setVisibility(View.INVISIBLE);
             bmImage.setImageBitmap(result);
         }
     }

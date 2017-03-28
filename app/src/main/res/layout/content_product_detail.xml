@@ -27,6 +27,9 @@
         android:id="@+id/product_id_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Product Id:"/>
 
     <TextView
@@ -45,6 +48,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Product Name:"/>
 
     <TextView
@@ -62,6 +68,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Short description:"/>
     <TextView
         android:id="@+id/short_description"
@@ -78,6 +87,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Long description:"/>
     <TextView
         android:id="@+id/long_description"
@@ -94,6 +106,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Price:"/>
     <TextView
         android:id="@+id/price"
@@ -110,6 +125,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Review rating:"/>
     <TextView
         android:id="@+id/review_rating"
@@ -126,6 +144,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="Review count:"/>
     <TextView
         android:id="@+id/review_count"
@@ -142,6 +163,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:textStyle="bold"
         android:text="In stock:"/>
     <TextView
         android:id="@+id/in_stock"
