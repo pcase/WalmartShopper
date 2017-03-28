@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product implements Parcelable {
-
     private String productId;
     private String productName;
     private String shortDescription;

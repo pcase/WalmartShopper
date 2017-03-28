@@ -24,15 +24,13 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Product>> {
-
+    private static final String TAG = "ProductInfoFetcher";
     private static final String API_KEY = "e0a4274f-45b6-405b-839e-1096222be4fc";
     private static final String BASE_URL = "https://walmartlabs-test.appspot.com/_ah/api/walmart/v1";
     private static final String WALMART_PRODUCTS = "walmartproducts";
-    private static final String PAGE_NUMBER = "1";
     private static final String PAGE_SIZE = "10";
     private Context mContext;
     private ProgressBar progressBar;
-    private boolean mShowProgressBar;
     private int mPageNumber;
 
     public ProductInformationFetcher(Context context) {
@@ -49,11 +47,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
     protected void onPreExecute() {
         super.onPreExecute();
         progressBar = (ProgressBar) ((Activity) mContext).findViewById(R.id.progressbar);
-        if (mShowProgressBar) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -98,7 +92,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
                     Bitmap bitmap = BitmapFactory.decodeStream(in);
                     product.setProductImageBitmap(bitmap);
                 } catch (Exception e) {
-                    Log.e("Error", e.getMessage());
+                    Log.e(TAG + ":" + "Error", e.getMessage());
                     e.printStackTrace();
                 }
             }
@@ -115,7 +109,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
                 try {
                     reader.close();
                 } catch (final IOException e) {
-                    Log.e("PlaceholderFragment", "Error closing stream", e);
+                    Log.e(TAG + ":" + "PlaceholderFragment", "Error closing stream", e);
                 }
             }
         }
@@ -133,8 +127,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
         try {
             JSONObject jObject = new JSONObject(result);
             JSONArray jArray = jObject.getJSONArray("products");
-            for (int i=0; i < jArray.length(); i++)
-            {
+            for (int i=0; i < jArray.length(); i++) {
                 try {
                     Product product = new Product();
                     JSONObject item = jArray.getJSONObject(i);
@@ -149,11 +142,11 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
                     product.setInStock(item.getBoolean("inStock"));
                     productList.add(product);
                 } catch (JSONException e) {
-
+                    Log.e(TAG, e.getMessage());
                 }
             }
         } catch (Exception e) {
-
+            Log.e(TAG, e.getMessage());
         }
         return productList;
     }

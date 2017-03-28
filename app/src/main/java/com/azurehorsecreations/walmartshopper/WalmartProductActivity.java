@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WalmartProductActivity extends AppCompatActivity implements CallbackReceiver, ProductAdapter.ItemClickListener {
-    private static final String PRODUCT = "PRODUCT";
     private static final String TAG = "WalmartProductActivity";
+    private static final String PRODUCT = "PRODUCT";
     private static final int NUMBER_OF_COLUMNS = 2;
     private RecyclerView recyclerView;
     private TextView emptyView;
@@ -39,7 +39,6 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
             int page = 1;
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.i(TAG, "onLoadMore() page=" + page);
                 ProductInformationFetcher productInformationFetcher = new ProductInformationFetcher(WalmartProductActivity.this, ++page);
                 productInformationFetcher.execute();
             }
@@ -71,14 +70,6 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
         recyclerView.setAdapter(productAdapter);
         productAdapter.notifyItemRangeInserted(currentSize, productList.size() - 1);
         scrollListener.resetState();
-        // This crashes
-//        recyclerView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                productAdapter.notifyItemRangeInserted(currentSize, productList.size() - 1);
-//                scrollListener.resetState();
-//            }
-//        });
         runOnUiThread(new Runnable() {
             public void run() {
                 if ((productList == null) || (productList != null && productList.size() == 0)) {

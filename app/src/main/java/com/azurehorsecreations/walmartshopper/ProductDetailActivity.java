@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.io.InputStream;
 
 public class ProductDetailActivity extends AppCompatActivity {
+    private static final String TAG = "ProductDetailAct";
     private static final String PRODUCT = "PRODUCT";
     private Product product;
     private TextView productId;
@@ -50,10 +51,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         productImage = (ImageView) findViewById(R.id.product_image);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            productId.setText((Html.fromHtml(product.getProductId(), Html.FROM_HTML_MODE_LEGACY)));
-            productName.setText((Html.fromHtml(product.getProductName(), Html.FROM_HTML_MODE_LEGACY)));
-            shortDescription.setText(Html.fromHtml(product.getShortDescription(), Html.FROM_HTML_MODE_LEGACY));
-            longDescription.setText(Html.fromHtml(product.getLongDescription(), Html.FROM_HTML_MODE_LEGACY));
+            if (product.getProductId() != null) {
+                productId.setText((Html.fromHtml(product.getProductId(), Html.FROM_HTML_MODE_LEGACY)));
+            }
+            if (product.getProductName() != null) {
+                productName.setText((Html.fromHtml(product.getProductName(), Html.FROM_HTML_MODE_LEGACY)));
+            }
+            if (product.getShortDescription() != null) {
+                shortDescription.setText(Html.fromHtml(product.getShortDescription(), Html.FROM_HTML_MODE_LEGACY));
+            }
+            if (product.getLongDescription() != null) {
+                longDescription.setText(Html.fromHtml(product.getLongDescription(), Html.FROM_HTML_MODE_LEGACY));
+            }
         } else {
             if (product.getProductId() != null) {
                 productId.setText((Html.fromHtml(product.getProductId())));
@@ -103,7 +112,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream(in);
                 in.close();
             } catch (Exception e) {
-                Log.e("Error", e.getMessage());
+                Log.e(TAG + ": Error", e.getMessage());
                 e.printStackTrace();
             };
             return bitmap;

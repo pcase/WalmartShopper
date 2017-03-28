@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    public static final String TAG = "ProductAdapter";
+    private static final String TAG = "ProductAdapter";
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private List<Product> mProductList;
