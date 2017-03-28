@@ -4,4 +4,5 @@
     <string name="title_activity_product_detail">ProductDetail</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
