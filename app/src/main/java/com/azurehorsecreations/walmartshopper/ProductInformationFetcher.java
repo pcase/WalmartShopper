@@ -29,7 +29,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
     private static final String BASE_URL = "https://walmartlabs-test.appspot.com/_ah/api/walmart/v1";
     private static final String WALMART_PRODUCTS = "walmartproducts";
     private static final String PAGE_NUMBER = "1";
-    private static final String PAGE_SIZE = "50";
+    private static final String PAGE_SIZE = "10";
     private Context mContext;
     private ProgressBar progressBar;
     private boolean mShowProgressBar;

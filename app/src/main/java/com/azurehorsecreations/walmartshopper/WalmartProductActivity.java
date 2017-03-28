@@ -40,7 +40,7 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.i(TAG, "onLoadMore() page=" + page);
-                ProductInformationFetcher productInformationFetcher = new ProductInformationFetcher(WalmartProductActivity.this, page);
+                ProductInformationFetcher productInformationFetcher = new ProductInformationFetcher(WalmartProductActivity.this, ++page);
                 productInformationFetcher.execute();
             }
         };
@@ -64,7 +64,8 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
             size = 0;
         }
         final int currentSize = size;
-        productList = (List<Product>) object;
+        List<Product> newProductList = (List<Product>) object;
+        productList.addAll(newProductList);
         productAdapter = new ProductAdapter(WalmartProductActivity.this, productList);
         productAdapter.setClickListener(WalmartProductActivity.this);
         recyclerView.setAdapter(productAdapter);
