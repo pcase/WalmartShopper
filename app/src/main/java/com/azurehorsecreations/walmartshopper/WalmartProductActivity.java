@@ -5,13 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +43,26 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
         productInformationFetcher.execute();
     }
 
+    // Display the product's detail page
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(this, ProductDetailActivity.class);
-        intent.putExtra(PRODUCT, productAdapter.getItem(position));
+        Intent intent = new Intent(this, ProductDetailPagerActivity.class);
+        Product[] productArrayToSend = new Product[productList.size()];
+        int listIndexFromPosition = position;
+        for (int i=0; i<productList.size()-position; ++i) {
+            productArrayToSend[i] = productList.get(listIndexFromPosition);
+            ++listIndexFromPosition;
+        }
+        int listIndexToPosition = 0;
+        for (int i = productList.size()-position; i<productList.size(); ++i) {
+            productArrayToSend[i] = productList.get(listIndexToPosition);
+            ++listIndexToPosition;
+        }
+        intent.putExtra(PRODUCT, productArrayToSend);
         startActivity(intent);
     }
 
+    // Update the product page with loaded data
     public void handleResultData(Object object) {
         int size;
         if (productAdapter != null) {
