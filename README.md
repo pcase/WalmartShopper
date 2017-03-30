@@ -9,7 +9,6 @@ Each fetch of products requests a new page and the maximum of 30 products.
 Known issues:
 
 - Image loading on the detail page is slow.
-
 - When new data is loaded, the page automatically scrolls to the top instead of staying at the current position.
-
 - New data loading is jumpy.
+- Loading is very slow on a Nexus 6P
