@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
     private ProductAdapter productAdapter;
     private List<Product> productList = new ArrayList<>();
     private EndlessRecyclerViewScrollListener scrollListener;
+    private int pageToLoad = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +33,10 @@ public class WalmartProductActivity extends AppCompatActivity implements Callbac
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, NUMBER_OF_COLUMNS);
         recyclerView.setLayoutManager(gridLayoutManager);
         scrollListener = new EndlessRecyclerViewScrollListener(gridLayoutManager) {
-            int page = 1;
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                ProductInformationFetcher productInformationFetcher = new ProductInformationFetcher(WalmartProductActivity.this, ++page);
+                ++pageToLoad;
+                ProductInformationFetcher productInformationFetcher = new ProductInformationFetcher(WalmartProductActivity.this, pageToLoad);
                 productInformationFetcher.execute();
             }
         };

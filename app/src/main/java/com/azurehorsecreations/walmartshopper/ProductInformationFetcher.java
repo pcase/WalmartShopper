@@ -28,7 +28,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
     private static final String API_KEY = "e0a4274f-45b6-405b-839e-1096222be4fc";
     private static final String BASE_URL = "https://walmartlabs-test.appspot.com/_ah/api/walmart/v1";
     private static final String WALMART_PRODUCTS = "walmartproducts";
-    private static final String PAGE_SIZE = "10";
+    private static final String PAGE_SIZE = "30";
     private Context mContext;
     private ProgressBar progressBar;
     private int mPageNumber;
@@ -99,7 +99,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
 
             return productList;
         } catch (IOException e) {
-            Log.e("PlaceholderFragment", "Error ", e);
+            Log.e(TAG, "Error ", e);
             return null;
         } finally{
             if (urlConnection != null) {
@@ -109,7 +109,7 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
                 try {
                     reader.close();
                 } catch (final IOException e) {
-                    Log.e(TAG + ":" + "PlaceholderFragment", "Error closing stream", e);
+                    Log.e(TAG, "Error closing stream", e);
                 }
             }
         }
@@ -131,15 +131,33 @@ public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Produc
                 try {
                     Product product = new Product();
                     JSONObject item = jArray.getJSONObject(i);
-                    product.setProductId(item.getString("productId"));
-                    product.setProductName(item.getString("productName"));
-                    product.setShortDescription(item.getString("shortDescription"));
-                    product.setLongDescription(item.getString("longDescription"));
-                    product.setPrice(item.getString("price"));
-                    product.setProductImage(item.getString("productImage"));
-                    product.setReviewRating(item.getDouble("reviewRating"));
-                    product.setReviewCount(item.getInt("reviewCount"));
-                    product.setInStock(item.getBoolean("inStock"));
+                    if (item.has("productId")) {
+                        product.setProductId(item.getString("productId"));
+                    }
+                    if (item.has("productName")) {
+                        product.setProductName(item.getString("productName"));
+                    }
+                    if (item.has("shortDescription")) {
+                        product.setShortDescription(item.getString("shortDescription"));
+                    }
+                    if (item.has("longDescription")) {
+                        product.setLongDescription(item.getString("longDescription"));
+                    }
+                    if (item.has("price")) {
+                        product.setPrice(item.getString("price"));
+                    }
+                    if (item.has("productImage")) {
+                        product.setProductImage(item.getString("productImage"));
+                    }
+                    if (item.has("reviewRating")) {
+                        product.setReviewRating(item.getDouble("reviewRating"));
+                    }
+                    if (item.has("reviewCount")) {
+                        product.setReviewCount(item.getInt("reviewCount"));
+                    }
+                    if (item.has("inStock")) {
+                        product.setInStock(item.getBoolean("inStock"));
+                    }
                     productList.add(product);
                 } catch (JSONException e) {
                     Log.e(TAG, e.getMessage());
