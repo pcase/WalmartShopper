@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /*
- * Class that represents the product model
+ * Product class represents the product model
  */
 
 public class Product implements Parcelable {

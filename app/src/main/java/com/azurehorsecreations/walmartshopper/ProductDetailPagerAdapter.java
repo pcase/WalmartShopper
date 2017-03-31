@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /*
- * Adapter for product detail fragment
+ * ProductDetailPagerAdapter handles product detail fragment data
  */
 
 public class ProductDetailPagerAdapter extends FragmentPagerAdapter {

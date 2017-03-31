@@ -10,6 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * ProductDetailPagerActivity displays the product details in a swipeable viewer
+ */
+
 public class ProductDetailPagerActivity extends AppCompatActivity {
     private static final String PRODUCT = "PRODUCT";
     private Product product;

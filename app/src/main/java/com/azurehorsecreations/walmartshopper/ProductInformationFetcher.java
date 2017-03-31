@@ -23,6 +23,10 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/*
+ * ProductInformationFetcher downloads a page of product information
+ */
+
 public class ProductInformationFetcher extends AsyncTask<Void, Void, List<Product>> {
     private static final String TAG = "ProductInfoFetcher";
     private static final String API_KEY = "e0a4274f-45b6-405b-839e-1096222be4fc";

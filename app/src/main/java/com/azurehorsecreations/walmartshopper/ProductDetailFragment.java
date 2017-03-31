@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.io.InputStream;
 
 /*
- * Fragment for product detail page
+ * ProductDetailFragment is a fragment for the product detail page
  */
 
 public class ProductDetailFragment extends Fragment {

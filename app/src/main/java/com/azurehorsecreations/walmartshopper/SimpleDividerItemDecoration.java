@@ -8,8 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Class for the horizontal lines used in a list
+ * SimpleDividerItemDecoration class for the horizontal lines used in a list
  */
+
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 

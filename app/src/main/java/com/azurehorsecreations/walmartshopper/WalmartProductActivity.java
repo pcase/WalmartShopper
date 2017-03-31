@@ -12,6 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * WalmartProductActivity fetches and displays product names and images in a list
+ */
+
 public class WalmartProductActivity extends AppCompatActivity implements CallbackReceiver, ProductAdapter.ItemClickListener {
     private static final String TAG = "WalmartProductActivity";
     private static final String PRODUCT = "PRODUCT";

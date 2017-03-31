@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 /*
- * Splash screen activity
+ * SplashActivity displays the splash screen
  */
 
 public class SplashActivity extends AppCompatActivity {

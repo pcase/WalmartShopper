@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
 
+/*
+ * ProductAdapter handles product name and image information for the product page
+ */
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private static final String TAG = "ProductAdapter";
     private LayoutInflater mInflater;
