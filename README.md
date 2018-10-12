@@ -1,6 +1,6 @@
 # WalmartShopper
 
-The Walmart Shopper app displays available products in a two column format with the product image and product name,
+The Walmart Shopper Android app displays available products in a two column format with the product image and product name,
 
 Clicking on a product will display product details. Swiping to next items is enabled. However sweeping to the previous item is not currently enabled although the previous items will be reached by continually sweeping to the right.
 
